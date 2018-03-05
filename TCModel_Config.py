@@ -1,5 +1,5 @@
 '''
-    L23modelConfig_b.py contains simulation configurations for L23modelRun_b.py.
+    TCModel_Config.py contains simulation configurations for TCModel_Run.py.
 
     Contributors: Vergil R. Haynes, vrhaynes.tech@gmail.com
 
