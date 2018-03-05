@@ -2,7 +2,7 @@
     TCModel_Run.py imports parameter dictionaries from TCModel_Params.py and TCModel_Config.py
     then performs automated simulations in batch.
 
-    Simulation designed to replicate Demo3D from
+    Simulation designed to reconstruct network model from
     http://www.opensourcebrain.org/projects/thalamocortical/wiki
     using NetPyNe.
 
