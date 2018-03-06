@@ -34,10 +34,10 @@ path2cells = 'cells/generatedNEURON'
 
 # Compile mod files and load them
 # Uncomment 'os.system()' on first run
-os.system('''
-          cd mod/generatedNEURON
-          nrnivmodl
-          ''')
+# os.system('''
+#           cd mod/generatedNEURON
+#           nrnivmodl
+#           ''')
 neuron.load_mechanisms('mod/generatedNEURON/')
 
 
@@ -645,11 +645,12 @@ class PopulationParams(NetworkParams):
 
                             Y_projectParams.update({ gjtype : {
                                     'preConds' : {'pop' : pop_i}, 'postConds' : {'pop' : pop_i},
-                                    'weight' : 1.,
                                     'synMech' : 'GJ_' + pop_i,
                                     'connFunc' : 'traubCellConn',
                                     'numPreToPost' : self.num_conns[pre_id][pre_id],
-                                    'synsPerConn' : num_gj,
+                                    'synsPerConn' : num_gj if num_gj>1 else None,
+                                    'delay' : np.zeros(num_gj).tolist() if num_gj>1 else None,
+                                    'weight' : np.ones(num_gj).tolist() if num_gj>1 else None,
                                     'gapJunction' : True,       # TODO True vs 'pre' vs 'post'?
                                     'sec' : secs,
                                     'preSec' : secs
@@ -697,8 +698,6 @@ class PopulationParams(NetworkParams):
                                     'preConds': {'pop': pop_i}, 'postConds': {'pop': pop_j},
                                     'connFunc' : 'traubCellConn',
                                     'numPreToPost' : self.num_conns[pre_id][post_id],
-                                    # 'weight': [self.Y_synapseMechParams['AMPA_' + pop_i + '_to_' + pop_j]['g'],     # weight is unitary conductance here
-                                    #            self.Y_synapseMechParams['NMDA_' + pop_i + '_to_' + pop_j]['g']],
                                     'delay': 0,             # ignore axonal conduction delays within column (NOTE: defaults to 1 if omitted)
                                     'sec': secs,
                                     'synMech' : ['AMPA_' + pop_i + '_to_' + pop_j, 'NMDA_' + pop_i + '_to_' + pop_j],       # makes 2 synapses per sec
@@ -721,7 +720,7 @@ class PopulationParams(NetworkParams):
                                     'preConds': {'pop': pop_i}, 'postConds': {'pop': pop_j},
                                     'connFunc' : 'traubCellConn',
                                     'numPreToPost' : self.num_conns[pre_id][post_id],
-                                    # 'weight': self.Y_synapseMechParams['GABA_' + pop_i + '_to_' + pop_j]['g'],
+                                    'weight' : None, # TODO: Temporary fix to NETPYNE error not defaulting to None
                                     'delay': 0,         # ignore axonal conduction delays within column (NOTE: defaults to 1 if omitted)
                                     'sec': secs,
                                     'synMech' : 'GABA_' + pop_i + '_to_' + pop_j,
