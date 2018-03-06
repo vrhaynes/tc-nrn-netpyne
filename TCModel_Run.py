@@ -106,7 +106,7 @@ if __name__ == '__main__':
         # Stimulating electrode source and target
         netParams.stimSourceParams['depol_step_current'] =  {
                     'type': 'IClamp',
-                    'delay' : 200, 'dur': 200,
+                    'del' : 200, 'dur': 200,
                     'amp': 1.5} # del/dur in ms and amp in nA
 
         # choose section from potential targets (can only be one section)
