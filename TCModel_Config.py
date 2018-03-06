@@ -169,11 +169,9 @@ class SimulationConfigs(BatchConfigs):
                               #                  'saveFig' : join(self.path2figs,'TC_bl_ratePSD.png'),
                               #                  'showFig' : False,
                               #                 },
-                              'plotConn' : {'orderBy' : 'pop',
+                              'plotConn' : {'groupBy' : 'pop',
                                             'saveFig' : join(self.path2figs,'TC_synConn.png'), # TODO: change this for batches
                                             # 'feature' : 'numConns',           # default: strength = weight*probability NOTE: using weight and showing each cell to test
-                                            # 'synOrConn' : 'syn',
-                                            # 'groupBy' : 'cell',
                                             'showFig' : False,
                                             },
                              })
